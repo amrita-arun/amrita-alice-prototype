@@ -1,0 +1,106 @@
+# LOT levels. 6x6 grid, x = column (0 left), y = row (0 bottom).
+#
+# level <name>
+# exit  <L|R|T|B> <index>      the REAL exit (drawn as a slightly thicker wall)
+# notch <L|R|T|B> <index>      optional fake exit (a painted gap that is a wall)
+# car   <x> <y> <len> <H|V> <color> [target] [fuelN] [left|right|up|down]
+#        x,y is the bottom-left cell. color: red blue teal yellow purple orange green pink gray
+#        target = the car that must leave (it breathes)
+#        fuelN  = the car can only be dragged N more times (pips on its roof); no fuel token = unlimited
+#        left/right/up/down = headlight; the car can only drive that way
+#        cars that share a color (and are not the target) always move together
+# end
+#
+# Check solvability after editing:  python3 Tools/solve_levels.py
+
+level drive
+exit R 2
+car 1 2 2 H red target
+car 4 1 2 V blue
+car 3 0 3 V yellow
+end
+
+level jam
+exit R 2
+car 0 2 2 H red target
+car 2 3 3 H blue
+car 3 5 2 H purple
+car 0 4 2 V orange
+car 5 2 2 V yellow
+car 4 0 3 V green
+car 2 4 2 V pink
+end
+
+level twins
+exit R 2
+car 0 2 2 H red target
+car 3 1 2 V teal
+car 1 4 2 V teal
+car 1 3 2 H gray
+end
+
+level one way
+exit R 2
+car 0 2 2 H red target
+car 3 2 2 V blue down
+car 2 0 2 H orange
+car 5 0 3 V yellow
+car 4 5 2 H purple left
+end
+
+level fuel
+exit R 2
+car 0 2 2 H red target
+car 3 0 3 V yellow fuel1
+car 3 4 2 H blue fuel1
+car 5 3 2 V purple
+end
+
+level decoy
+exit T 3
+car 1 2 3 H red
+car 3 0 2 V yellow target
+car 2 4 3 H blue
+car 0 3 2 V green
+end
+
+level fake door
+exit L 2
+notch R 2
+car 2 2 2 H red target
+car 1 1 2 V teal
+car 0 0 2 H orange
+car 0 2 3 V green
+car 0 5 2 H blue
+end
+
+level pair lights
+exit R 2
+car 0 2 2 H red target
+car 2 2 2 V teal
+car 4 3 2 V teal up
+car 4 5 2 H purple left
+car 3 4 2 V orange down
+end
+
+level last drop
+exit T 1
+car 1 0 2 V green target fuel1
+car 0 2 2 H red fuel1
+car 0 3 2 H orange
+car 1 5 2 H blue
+car 3 3 2 H blue
+car 5 3 2 V purple fuel1
+end
+
+level everything
+exit B 4
+notch R 2
+car 4 4 2 V pink target
+car 3 2 2 H red
+car 3 1 2 H teal fuel1
+car 1 4 2 H teal fuel1
+car 0 3 2 V green down
+car 4 3 2 H gray fuel2
+car 4 0 2 H orange left fuel1
+end
